@@ -9,14 +9,14 @@ read your script while holding eye contact with the camera. 100% local — no
 network, no telemetry, no accounts. → https://github.com/Shauryagulati/eyeline
 
 ```sh
-brew install --cask --no-quarantine shauryagulati/tap/eyeline
+brew install --cask shauryagulati/tap/eyeline
 ```
 
-`--no-quarantine` is needed because Eyeline isn't notarized by Apple yet — it
-lets the app open without the Gatekeeper warning. (It's a free project with no
-paid Apple Developer account.) Without that flag the app still installs, but
-macOS blocks the first launch and you'd have to allow it under **System Settings
-→ Privacy & Security → Open Anyway**.
+That's it — the app opens normally. Eyeline isn't notarized by Apple yet (it's a
+free project with no paid Apple Developer account), so macOS would otherwise
+quarantine it and Gatekeeper would block the first launch. The cask clears that
+quarantine flag for you on install, so there's no extra flag or step. (The one
+line that does it is right there in [`Casks/eyeline.rb`](Casks/eyeline.rb).)
 
 To update or remove it later:
 
