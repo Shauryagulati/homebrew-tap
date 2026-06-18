@@ -25,14 +25,14 @@ cask "eyeline" do
                    must_succeed: false
   end
 
+  zap trash: [
+    "~/Library/Preferences/com.eyeline.Eyeline.plist",
+    "~/Library/Saved Application State/com.eyeline.Eyeline.savedState",
+  ]
+
   caveats <<~EOS
     Eyeline is open-source but not notarized by Apple, so this cask cleared the macOS
     quarantine flag so it can open normally. The app is 100% local and the source is at
     #{homepage}
   EOS
-
-  zap trash: [
-    "~/Library/Preferences/com.eyeline.Eyeline.plist",
-    "~/Library/Saved Application State/com.eyeline.Eyeline.savedState",
-  ]
 end
