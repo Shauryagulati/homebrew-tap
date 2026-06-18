@@ -16,6 +16,21 @@ cask "eyeline" do
 
   app "Eyeline.app"
 
+  # Eyeline is open-source but not notarized (no paid Apple Developer ID yet), so macOS
+  # quarantines the download and Gatekeeper would block the first launch. Clear the flag
+  # here so `brew install` "just works" — the equivalent of the old `--no-quarantine`.
+  postflight do
+    system_command "/usr/bin/xattr",
+                   args:         ["-dr", "com.apple.quarantine", "#{appdir}/Eyeline.app"],
+                   must_succeed: false
+  end
+
+  caveats <<~EOS
+    Eyeline is open-source but not notarized by Apple, so this cask cleared the macOS
+    quarantine flag so it can open normally. The app is 100% local and the source is at
+    #{homepage}
+  EOS
+
   zap trash: [
     "~/Library/Preferences/com.eyeline.Eyeline.plist",
     "~/Library/Saved Application State/com.eyeline.Eyeline.savedState",
